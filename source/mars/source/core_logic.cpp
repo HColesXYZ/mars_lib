@@ -21,7 +21,8 @@ CoreLogic::CoreLogic(std::shared_ptr<CoreState> core_states) : core_states_(move
   std::cout << "Created: CoreLogic" << std::endl;
 }
 
-int CoreLogic::Initialize(const Eigen::Vector3d& p_wi_init, const Eigen::Quaterniond& q_wi_init)
+int CoreLogic::Initialize(const Eigen::Vector3d& p_wi_init, const Eigen::Quaterniond& q_wi_init, 
+                                    const Eigen::Vector3d& core_init_bw, const Eigen::Vector3d& core_init_ba)
 {
   if (buffer_prior_core_init_.IsEmpty())
   {
@@ -52,7 +53,7 @@ int CoreLogic::Initialize(const Eigen::Vector3d& p_wi_init, const Eigen::Quatern
 
   initial_core_state.state_ = core_states_->InitializeState(
       imu_measurement.angular_velocity_, imu_measurement.linear_acceleration_, p_wi_init, Eigen::Vector3d::Zero(),
-      q_wi_init, Eigen::Vector3d::Zero(), Eigen::Vector3d::Zero());
+      q_wi_init, core_init_bw, core_init_ba);
 
   initial_core_state.cov_ = core_states_->InitializeCovariance();
 

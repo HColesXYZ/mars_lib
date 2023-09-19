@@ -53,8 +53,9 @@ public:
   /// Uses the latest propagation sensor to initialize the core
   /// state and writes the init state to the main buffer.
   /// \note At leased one IMU measurement must exist
-  int Initialize(const Eigen::Vector3d& p_wi_init, const Eigen::Quaterniond& q_wi_init);
-
+  int Initialize(const Eigen::Vector3d& p_wi_init, const Eigen::Quaterniond& q_wi_init,
+                                          const Eigen::Vector3d& core_init_bw = Eigen::Vector3d::Zero(),
+                                          const Eigen::Vector3d& core_init_ba = Eigen::Vector3d::Zero());
   ///
   /// \brief GenerateStateTransitionBlock Returns the state transition block between 'first_transition_idx' and
   /// 'last_transition_idx'
